@@ -47,6 +47,7 @@ struct CardeView: View {
 }
 
 func s() -> String {
-    let s = "s"
+    let s = "sss"
     return s
 }
+
