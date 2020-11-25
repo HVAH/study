@@ -9,14 +9,16 @@
 import SwiftUI
 
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     var viewModel: EmojiMemoryGame
     
     var body: some View {
         
         return HStack{
             ForEach(viewModel.cards) { card in
-                CardeView(card: card)
+                CardeView(card: card).onTapGesture {
+                    self.viewModel.choose(card: card)
+                }
         
             }
             
@@ -49,6 +51,6 @@ struct CardeView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
