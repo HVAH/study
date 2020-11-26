@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  study
 //
 //  Created by hvah on 2020/11/23.
@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct EmojiMemoryGameView: View {
-    var viewModel: EmojiMemoryGame
+    @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
         
@@ -25,7 +25,7 @@ struct EmojiMemoryGameView: View {
         }
             .padding()
             .foregroundColor(Color.orange)
-            .font(Font.largeTitle)
+            
     }
 }
 
@@ -34,19 +34,33 @@ struct CardeView: View {
     var card: MemoryGame<String>.Card
    
     var body: some View {
+        GeometryReader{ geometry in
+            body(geometry.size)
+        }
+       
+    }
+    
+    func body(_ size: CGSize) -> some View {
         ZStack{
             if card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: lineWidth)
                 Text(card.content)
             } else {
-                RoundedRectangle(cornerRadius: 10.0).fill()
+                RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
             
             
         }
+        .font(Font.system(size: min(size.width, size.height) * fontScaleFactor))
     }
+    
+    let cornerRadius: CGFloat = 10.0
+    let lineWidth: CGFloat = 3
+    let fontScaleFactor: CGFloat = 0.75
 }
+
+
 
 
 struct ContentView_Previews: PreviewProvider {
