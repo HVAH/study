@@ -15,7 +15,7 @@ struct EmojiMemoryGameView: View {
     var body: some View {
         
         return HStack{
-            ForEach(viewModel.cards) { card in
+            Grid(viewModel.cards) { card in
                 CardeView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
                 }
@@ -52,14 +52,16 @@ struct CardeView: View {
             
             
         }
-        .font(Font.system(size: min(size.width, size.height) * fontScaleFactor))
+        .font(Font.system(size: fontSize(size)))
     }
     
     let cornerRadius: CGFloat = 10.0
     let lineWidth: CGFloat = 3
-    let fontScaleFactor: CGFloat = 0.75
 }
 
+func fontSize(_ size: CGSize) -> CGFloat {
+    return min(size.width, size.height) * 0.75
+}
 
 
 
